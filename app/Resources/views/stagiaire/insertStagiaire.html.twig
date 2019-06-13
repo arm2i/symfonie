@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block menu %}{% endblock %}
+
+{% block body %}
+    {# afficher les champs du formulaire un par un, en utilisant
+       la variable formArticle passée depuis le controller #}
+
+
+    <div class="card" style="{% if id == null %}
+                              margin:auto;width: 30rem;background:#b3e2c7{% else %} margin:auto;width: 30rem; background:#9ADBE0{% endif %}">
+    <div class="px-4 py-3">
+
+        {% if id == null %}<h1 class="alert alert-primary">Ajouter un Stagiaire</h1>
+        {% else %}<h1 class="alert alert-primary">Modifier un Stagiaire</h1>{% endif %}
+
+        {{ form_start(formStagiaire) }}
+
+            {{ form_label(formStagiaire.name , 'Nom : ')}}
+            {{ form_widget(formStagiaire.name,{ 'attr': {'class': 'input-group-append form-text text-muted', 'placeholder': "Ex: Dupont"}} )}}
+            {{ form_errors(formStagiaire.name)}}  <br>
+
+
+            {{ form_label(formStagiaire.phone, 'Tél: ')}}
+            {{ form_widget(formStagiaire.phone,{'attr': {'class': 'input-group-append form-text text-muted', 'placeholder': "0102030405"}}) }}
+            {{ form_errors(formStagiaire.phone)}}  <br>
+
+            {{ form_label(formStagiaire.birthday, 'Né(e) le : ')}}
+            {{ form_widget(formStagiaire.birthday) }}
+            {{ form_errors(formStagiaire.birthday)}}  <br><br>
+
+            {{ form_label(formStagiaire.competence, 'Vos Compétences : ')}}
+            {{ form_widget(formStagiaire.competence,{ 'attr': {'multiple class': 'input-group-append'}})}} <br>
+
+     <br>
+
+        <input type="submit" class="btn btn-primary" value="{% if id == null %}S'inscrire{% else %}Modifier{% endif %}" />
+        <a href="view-all-stagiaire" > {% if id == null %}<input type="button"  class="btn btn-dark" value="Retour">{% endif %} </a>
+
+        </div>
+    </div>
+
+         {{ form_end(formStagiaire) }}
+
+
+{% endblock %}

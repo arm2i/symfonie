@@ -1,0 +1,8 @@
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+
+stagiaire_form:
+    resource: '@AppBundle/Controller/StagiaireFormController.php'
+    type: annotation

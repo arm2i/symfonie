@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block menu %}
+    {# surcharge du block menu dans base.html.twig : on laisse le block vide
+        donc plus de menu sur ce template
+
+        <a href="{{ path('remove-stagiaire', {'id': stagiaire.getid()}) }}"
+                   class="btn btn-default">Sup</a>
+    <img src="{{ asset('images/delete.jpg') }}"
+                          alt="Poubelle" border="0" width="40" height="30"/>
+
+    #}
+
+
+
+{% endblock %}
+
+{% block body  %}
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        table td {
+            border:1px solid;
+            padding: 10px;
+        }
+    </style>
+
+
+<div class="card" style="margin:auto;width:13cm;background:#b3e2c7">
+    <div class="px-3 py-2">
+    <h1 class="alert alert-primary"> Liste des Stagiaires <a  href="insert-with-form-stagiaire">
+            <img src="{{ asset('images/ajout.jpg') }}" title="Ajouter un stagiaire" border="0" width="40" height="30"/></a>
+        </h1>
+
+
+    <table >
+        {% for key,stagiaire in stagiaires %}
+            <tr>
+                <td>{{ stagiaire.getname() |capitalize }}</td>
+                <td>{{ stagiaire.getphone() }}</td>
+                <td>{{ stagiaire.getbirthday() | date('d/m/Y') }}</td>
+                <td> <a  href="remove-stagiaire/{{stagiaire.getid() }}">
+                        <img src="{{ asset('images/delete.jpg') }}" title="Supprimer un stagiaire" border="0" width="40" height="30"/></a>
+                    <a  href="insert-with-form-stagiaire/{{stagiaire.getid() }}">
+                        <img src="{{ asset('images/modif.jpg') }}" title="Modifier un stagiaire" border="0" width="40" height="30"/></a>
+                </td>
+
+            </tr>
+        {% endfor %}
+
+    </table>
+
+    <script type="text/javascript">
+
+        $("tr").on('mouseover', function() {
+            // le $(this) reprénsente l'élément précis qui a déclenché l'évenement
+            $(this).css('background-color', 'red');
+        });
+
+        $("tr").on('mouseout', function() {
+            $(this).css('background-color', '');
+        });
+
+    </script>
+{% endblock %}

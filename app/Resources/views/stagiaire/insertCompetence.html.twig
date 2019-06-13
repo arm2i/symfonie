@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block menu %}{% endblock %}
+
+{% block body %}
+    {# afficher les champs du formulaire un par un, en utilisant
+       la variable formArticle passée depuis le controller #}
+    <div class="card" style="margin:auto;width: 40rem; background:#b3e2c7 ">
+        <div class="px-4 py-3">
+        {{ form_start(formCompetence) }}
+            <h1>Ajouter une compétence</h1>
+
+            {{ form_label(formCompetence.name , 'Compétence : ')}}
+            {{ form_widget(formCompetence.name,{ 'attr': {'class': 'input-group-append form-text text-muted', 'placeholder': "saisir compétence..."}} )}}
+            {{ form_errors(formCompetence.name)}}  <br>
+
+        <input type="submit" class="btn btn-primary" value="Ajouter la competence" />
+        </div>
+
+    </div>
+<br>
+    <div class="card" style="margin:auto; background:#DB5B48 ">
+    <div class="px-4 py-3">
+    <h3 class="alert alert-danger card">Liste des compétences éxistantes:</h3>
+    {% for key,listecompetence in listecompetence%}
+        {{listecompetence.name ~ '-'}}
+    {% endfor %}
+    </div>
+    </div>
+
+         {{ form_end(formCompetence) }}
+    </div>
+
+{% endblock %}
+
+
